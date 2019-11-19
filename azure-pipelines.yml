@@ -12,5 +12,4 @@ pool:
 steps:
 - task: CmdLine@2
   inputs:
-    script: 'iics.exe --help'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/TEST'
+    script: '$(System.DefaultWorkingDirectory)/TEST/iics --help'
