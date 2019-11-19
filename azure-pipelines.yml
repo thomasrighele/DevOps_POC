@@ -15,5 +15,5 @@ steps:
     script: |
       
 
-      echo $(Pipeline.Workspace)
+      dir $(Pipeline.Workspace)
 
