@@ -17,5 +17,5 @@ steps:
 
 - task: PowerShell@2
   inputs:
-    filePath: 'TEST/iics.exe"'
+    filePath: 'TEST/iics.exe'
     arguments: '--help'
