@@ -16,4 +16,4 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'dir $(System.DefaultWorkingDirectory)/GC%20Integration"'
+    script: 'dir $(System.DefaultWorkingDirectory)/GC%20Integration'
