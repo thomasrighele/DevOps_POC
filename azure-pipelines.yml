@@ -13,7 +13,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      $(System.DefaultWorkingDirectory)/_GC Integration/IICS Asset Management Utility/iics.exe --help
+      
 
       echo $(Pipeline.Workspace)
 
