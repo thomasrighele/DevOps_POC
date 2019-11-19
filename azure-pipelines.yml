@@ -12,4 +12,8 @@ pool:
 steps:
 - task: CmdLine@2
   inputs:
-    script: 'echo lets play a game'
+    script: 'git clone "https://guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"'
+
+- task: CmdLine@2
+  inputs:
+    script: 'dir $(System.DefaultWorkingDirectory)/GC%20Integration"'
