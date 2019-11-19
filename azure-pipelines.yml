@@ -11,5 +11,9 @@ pool:
 
 steps:
 - task: CmdLine@2
+  name: Give_Permissions
+  inputs:
+    script: 'chmod +x "$(System.DefaultWorkingDirectory)/TEST/iics_linux"'
+- task: CmdLine@2
   inputs:
     script: '$(System.DefaultWorkingDirectory)/TEST/iics_linux --help'
