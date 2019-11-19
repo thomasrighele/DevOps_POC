@@ -29,4 +29,4 @@ steps:
 - task: CmdLine@2
   name: Git_Push
   inputs:
-    script: 'git push'
+    script: 'git push origin master'
