@@ -15,9 +15,7 @@ steps:
   inputs:
     script: 'git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"'
 
-
-- task: BatchScript@1
+- task: PowerShell@2
   inputs:
-    filename: 'iics.exe'
+    filePath: '"$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics.exe"'
     arguments: '--help'
-    workingFolder: '"$(System.DefaultWorkingDirectory)/TEST"'
