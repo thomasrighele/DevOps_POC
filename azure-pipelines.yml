@@ -15,13 +15,8 @@ steps:
   inputs:
     script: 'git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"'
 
-- task: CmdLine@2
-  name: Give_Permissions
-  inputs:
-    script: 'chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics.exe"'
 
-- task: CmdLine@2
-  name: Export_IICS_Package
+- task: BatchScript@1
   inputs:
-    script: '"$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics.exe"'
-
+    filename: '"$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics.exe"'
+    arguments: '--help'
