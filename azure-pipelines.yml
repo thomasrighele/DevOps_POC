@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: CmdLine@2
+  name: test1
   inputs:
     script: 'echo $(System.DefaultWorkingDirectory)/'
 
