@@ -39,7 +39,7 @@ steps:
 - task: CmdLine@2
   name: Git_Add
   inputs:
-    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Tom Righele" && git add . && git commit -m "update"'
+    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "update"'
 
 
 - task: CmdLine@2
@@ -52,5 +52,5 @@ steps:
 - task: CmdLine@2
   name: Git_Push
   inputs:
-    script: 'git push https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/IICS%20DevOps origin master' 
+    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git push origin master' 
 
