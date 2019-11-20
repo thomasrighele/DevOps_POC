@@ -28,7 +28,7 @@ steps:
 - task: CmdLine@2
   name: Remove_Clone
   inputs:
-    script: 'git rm --cached GC%20Integration'
+    script: 'git rm --cached "$(System.DefaultWorkingDirectory)/GC%20Integration"'
 
 - task: CmdLine@2
   name: Git_Push
