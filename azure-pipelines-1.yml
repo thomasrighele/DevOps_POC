@@ -20,7 +20,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-        git checkout -b master
+        git checkout master 2>/dev/null || git checkout -b master
 
         git config --global user.email "thomas.righele@guycarp.com"
         git config --global user.name "Thomas.Righele"
@@ -33,9 +33,7 @@ steps:
 
         git commit -m "copy test"
 
-        git status
-
-        git push https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/IICS%20DevOps origin master
+        git push https://Thomas.Righele@guycarp.visualstudio.com/GC%20Integration/_git/IICS%20DevOps origin master
 
       
       
