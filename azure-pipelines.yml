@@ -33,12 +33,12 @@ steps:
 - task: CmdLine@2
   name: Git_Add
   inputs:
-    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Tom Righele" && git add .'
+    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Tom Righele" && git add . %% git commit -m "update"'
 
 - task: CmdLine@2
-  name: Git_Commit
+  name: Git_Pull
   inputs:
-    script: 'git commit -m "update"'
+    script: 'git pull'
     
 
 - task: CmdLine@2
