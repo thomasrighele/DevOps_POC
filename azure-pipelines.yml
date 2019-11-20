@@ -31,15 +31,15 @@ steps:
     script: 'rm -R -f "GC%20Integration"'
 
 - task: CmdLine@2
+  name: Git_Checkout
+  inputs:
+    script: 'git checkout master 2>/dev/null || git checkout -b master;'
+
+
+- task: CmdLine@2
   name: Git_Add
   inputs:
     script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Tom Righele" && git add . && git commit -m "update"'
-
-- task: CmdLine@2
-  name: Git_Pull
-  inputs:
-    script: 'git pull https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/IICS%20DevOps'
-    
 
 - task: CmdLine@2
   name: Git_Push
