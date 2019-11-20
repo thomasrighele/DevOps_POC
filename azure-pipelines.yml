@@ -26,6 +26,11 @@ steps:
     script: '"$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/DevOps_POC.Project" --name "TestTom" --password "nVV89ZvV3aBsw5FT" --podHostName "dm-us.informaticacloud.com" --region "us" --username "Thomas.Righele_dev@guycarp.com" --zipFilePath "$(System.DefaultWorkingDirectory)/TEST/TestTom.zip"'
 
 - task: CmdLine@2
+  name: Remove_Clone
+  inputs:
+    script: 'git rm --cached GC%20Integration'
+
+- task: CmdLine@2
   name: Git_Push
   inputs:
     script: 'git add . && git commit -m "update" && git push origin master'
