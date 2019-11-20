@@ -18,9 +18,12 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
+        git checkout master 2>/dev/null || git checkout -b master;
+
         git config --global user.email "thomas.righele@guycarp.com"
         git config --global user.name "Thomas.Righele"
         git status
+
 
         git add .
 
