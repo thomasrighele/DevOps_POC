@@ -28,11 +28,21 @@ steps:
 - task: CmdLine@2
   name: Remove_Clone
   inputs:
-    script: 'git rm --cached "$(System.DefaultWorkingDirectory)/GC%20Integration"'
+    script: 'rm -R -f "GC%20Integration"'
+
+- task: CmdLine@2
+  name: Git_Add
+  inputs:
+    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Tom Righele" && git add .'
+
+- task: CmdLine@2
+  name: Git_Commit
+  inputs:
+    script: 'git commit -m "update"'
+    
 
 - task: CmdLine@2
   name: Git_Push
   inputs:
-    script: 'git add . && git commit -m "update" && git push origin master'
-
+    script: 'git push origin master' 
 
