@@ -10,47 +10,29 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- checkout: self
+  persistCredentials: true
 
 - task: CmdLine@2
-  name: Clone_GCInt_Repo
+  name: Export_IICS
+  displayName: Run IICS Utility an Export into Staging Folder
   inputs:
-    script: 'git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"'
-
-- task: CmdLine@2
-  name: Give_Permissions
-  inputs:
-    script: 'chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"'
-- task: CmdLine@2
-  name: Export_IICS_Package
-  inputs:
-    script: '"$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/DevOps_POC.Project" --name "TestTom" --password "nVV89ZvV3aBsw5FT" --podHostName "dm-us.informaticacloud.com" --region "us" --username "Thomas.Righele_dev@guycarp.com" --zipFilePath "$(System.DefaultWorkingDirectory)/TEST/TestTom.zip"'
-
-- task: CmdLine@2
-  name: Remove_Clone
-  inputs:
-    script: 'rm -R -f "GC%20Integration"'
-
-- task: CmdLine@2
-  name: Git_Checkout
-  inputs:
-    script: 'git checkout master 2>/dev/null || git checkout -b master;'
-
-
-- task: CmdLine@2
-  name: Git_Add
-  inputs:
-    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "update"'
-
-
-- task: CmdLine@2
-  name: Git_Pull
-  inputs:
-    script: 'git pull https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/IICS%20DevOps'
+    script: |
+      git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
+          chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
+          "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/DevOps_POC.Project" --name "TestTom" --password "nVV89ZvV3aBsw5FT" --podHostName "dm-us.informaticacloud.com" --region "us" --username "Thomas.Righele_dev@guycarp.com" --zipFilePath "$(System.DefaultWorkingDirectory)/TEST/TestTom.zip"
+          rm -R -f "GC%20Integration"
 
 
 
 - task: CmdLine@2
-  name: Git_Push
+  name: Git_Commands
+  displayName: Run Git to Push to Repo
   inputs:
-    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git push origin master' 
+    script: |
+      git checkout master 2>/dev/null || git checkout -b master
+          git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "Update Repo"
+          git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push
+
+
 
