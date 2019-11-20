@@ -33,7 +33,7 @@ steps:
 
         git commit -m "copy test"
 
-        git push https://Thomas.Righele@guycarp.visualstudio.com/GC%20Integration/_git/IICS%20DevOps origin master
+        git push -f origin master
 
       
       
