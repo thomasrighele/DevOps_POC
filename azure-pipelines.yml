@@ -28,7 +28,7 @@ steps:
 - task: CmdLine@2
   name: Remove_Clone
   inputs:
-    script: 'rmdir /q /s "GC%20Integration"'
+    script: 'rm -R -f "GC%20Integration"'
 
 - task: CmdLine@2
   name: Git_Push
