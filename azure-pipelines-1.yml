@@ -9,6 +9,8 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+
+
 steps: 
 - task: CmdLine@2
   name: Copy
@@ -33,7 +35,7 @@ steps:
 
         git status
 
-        git push origin master
+        git push https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/IICS%20DevOps origin master
 
       
       
