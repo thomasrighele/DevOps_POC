@@ -33,7 +33,7 @@ steps:
 - task: CmdLine@2
   name: Git_Add
   inputs:
-    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Tom Righele" && git add . && git commit -m "update" && git push origin master'
+    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Tom Righele" && git add .'
 
 - task: CmdLine@2
   name: Git_Commit
