@@ -23,5 +23,18 @@ steps:
 - task: CmdLine@2
   name: Export_IICS_Package
   inputs:
-    script: '"$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/DevOps_POC.Project" --name "TestTom" --password "nVV89ZvV3aBsw5FT" --podHostName "dm-us.informaticacloud.com" --region "us" --username "Thomas.Righele_dev@guycarp.com" --zipFilePath "$(System.DefaultWorkingDirectory)\TEST\TestTom.zip"'
+    script: '"$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/DevOps_POC.Project" --name "TestTom" --password "nVV89ZvV3aBsw5FT" --podHostName "dm-us.informaticacloud.com" --region "us" --username "Thomas.Righele_dev@guycarp.com" --zipFilePath "$(System.DefaultWorkingDirectory)/TEST/TestTom.zip"'
+
+
+- task: CmdLine@2
+  name: Outout_TESTfolder
+  inputs:
+    script: 'dir $(System.DefaultWorkingDirectory)/TEST'
+
+
+- task: CmdLine@2
+  name: Export_IICS_Package
+  inputs:
+    script: 'git push origin master'
+
 
