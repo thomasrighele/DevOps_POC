@@ -13,7 +13,7 @@ steps:
 - task: CmdLine@2
   name: Copy
   inputs:
-    script: 'cp $(System.DefaultWorkingDirectory)\testpush.txt $(System.DefaultWorkingDirectory)\TEST\testpush.txt'
+    script: 'cp $(System.DefaultWorkingDirectory)/testpush.txt $(System.DefaultWorkingDirectory)/TEST/testpush.txt'
 
 
 - task: CmdLine@2
