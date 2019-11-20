@@ -44,5 +44,5 @@ steps:
 - task: CmdLine@2
   name: Git_Push
   inputs:
-    script: 'git push -f origin master' 
+    script: 'git push -f origin master https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/IICS%20DevOps' 
 
