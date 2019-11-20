@@ -33,7 +33,7 @@ steps:
 
         git commit -m "copy test"
 
-        git push -f origin master
+        git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push
 
       
       
