@@ -12,6 +12,9 @@ pool:
 
 
 steps: 
+- checkout: self
+  persistCredentials: true
+
 - task: CmdLine@2
   name: Copy
   inputs:
