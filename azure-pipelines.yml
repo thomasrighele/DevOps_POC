@@ -44,5 +44,5 @@ steps:
 - task: CmdLine@2
   name: Git_Push
   inputs:
-    script: 'git push origin master --force' 
+    script: 'git push -f origin master' 
 
