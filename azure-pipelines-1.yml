@@ -15,16 +15,24 @@ steps:
   inputs:
     script: 'cp $(System.DefaultWorkingDirectory)/testpush.txt $(System.DefaultWorkingDirectory)/TEST/testpush.txt'
 
-
 - task: CmdLine@2
-  name: Git_Add
   inputs:
-    script: 'git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "update"'
+    script: |
+        git config --global user.email "thomas.righele@guycarp.com"
+        git config --global user.name "Thomas.Righele"
+        git status
 
+        git add .
 
-- task: CmdLine@2
-  name: Git_Push
-  inputs:
-    script: 'git push origin master' 
+        git status
+
+        git commit -m "copy test"
+
+        git status
+
+        git push origin master
+
+      
+      
 
 
