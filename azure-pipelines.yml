@@ -13,26 +13,31 @@ steps:
 - checkout: self
   persistCredentials: true
 
+#- task: CmdLine@2
+#  name: Export_IICS
+#  displayName: Run IICS Utility an Export into Staging Folder
+#  inputs:
+#    script: |
+#      git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
+#          chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
+#          "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "TestTom" --password "nVV89ZvV3aBsw5FT" --podHostName "dm-us.informaticacloud.com" --region "us" --username "Thomas.Righele_dev@guycarp.com" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName)-v1.zip"
+#          rm -R -f "GC%20Integration"
+
+
+
+#- task: CmdLine@2
+#  name: Git_Commands
+#  displayName: Run Git to Push to Repo
+#  inputs:
+#    script: |
+#      git checkout $(input.Target_Branch) 2>/dev/null || git checkout -b $(input.Target_Branch)
+#          git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "Update Repo"
+#          git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push
+
+
 - task: CmdLine@2
-  name: Export_IICS
-  displayName: Run IICS Utility an Export into Staging Folder
+  name: Output_Test
   inputs:
     script: |
-      git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
-          chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
-          "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "TestTom" --password "nVV89ZvV3aBsw5FT" --podHostName "dm-us.informaticacloud.com" --region "us" --username "Thomas.Righele_dev@guycarp.com" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName)-v1.zip"
-          rm -R -f "GC%20Integration"
-
-
-
-- task: CmdLine@2
-  name: Git_Commands
-  displayName: Run Git to Push to Repo
-  inputs:
-    script: |
-      git checkout $(input.Target_Branch) 2>/dev/null || git checkout -b $(input.Target_Branch)
-          git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "Update Repo"
-          git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push --set-upstream origin testb1
-
-
-
+      echo $(Build.SourceBranchName)
+      echo $(input.Target_Branch)
