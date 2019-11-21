@@ -23,7 +23,7 @@ steps:
           if [ $(input.Source_Environment) == "DEV" ]
             then 
               "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.DEV_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.DEV_Username)" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName).zip"
-            else if [ $(input.Source_Environment) == "SIT" ]
+            elif [ $(input.Source_Environment) == "SIT" ]
               "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName).zip"
             else 
               echo "Can only process DEV and SIT Sources right now"
