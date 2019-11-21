@@ -38,6 +38,6 @@ steps:
   inputs:
     script: |
       @echo off
-      SET /A a = 5
+      SET /A a = 5 
       SET /A b = 10
-      IF %a% LSS 10 (IF %b% GTR 0 (ECHO %a% is less than 10 AND %b% is greater than 0))
+      IF %a% LSS 10 (echo "Test")
