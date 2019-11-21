@@ -20,13 +20,15 @@ steps:
     script: |
       git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
          chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
-          if [ $(input.Source_Environment) == "DEV" ] then
+          if [ $(input.Source_Environment) == "DEV" ]; then
             "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.DEV_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.DEV_Username)" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName).zip"
-          elif [ $(input.Source_Environment) == "SIT" ] then
-            "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName).zip"
           else 
-            echo "Can only process DEV and SIT Sources right now"
-            exit 125
+            if [ $(input.Source_Environment) == "SIT" ]; then
+              "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName).zip"
+            else 
+              echo "Can only process DEV and SIT Sources right now"
+              exit 125
+            fi
           fi
           rm -R -f "GC%20Integration"
 
