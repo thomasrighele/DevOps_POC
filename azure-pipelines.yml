@@ -37,7 +37,7 @@ steps:
   inputs:
     script: |
       git checkout $(input.Target_Branch) 2>/dev/null || git checkout -b $(input.Target_Branch)
-         git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "Update Repo"
+         git config --global user.email "$(input.userEmail)" && git config --global user.name "$(input.userName)" && git add . && git commit -m "$(input.commitnote)"
          if [ $(input.Target_Branch) == "master" ]
           then
             git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push
