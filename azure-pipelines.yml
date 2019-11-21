@@ -32,7 +32,7 @@ steps:
     script: |
       git checkout $(input.Target_Branch) 2>/dev/null || git checkout -b $(input.Target_Branch)
           git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "Update Repo"
-          git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push
+          git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push --set-upstream origin testb1
 
 
 
