@@ -37,7 +37,5 @@ steps:
   displayName: Testing Logical operators in Batch
   inputs:
     script: |
-      @echo off
-      SET /A a = 5 
-      SET /A b = 10
-      IF %a% LSS 10 (echo "Test")
+      val=`expr 2 + 2`
+      echo "Total value : $val"
