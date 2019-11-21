@@ -13,37 +13,35 @@ steps:
 - checkout: self
   persistCredentials: true
 
-#- task: CmdLine@2
-#  name: Export_IICS
-#  displayName: Run IICS Utility an Export into Staging Folder
-#  inputs:
-#    script: |
-#      git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
-#         chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
-#          "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/DevOps_POC.Project" --name "TestTom" --password "nVV89ZvV3aBsw5FT" --podHostName "dm-us.informaticacloud.com" --region "us" --username "Thomas.Righele_dev@guycarp.com" --zipFilePath "$(System.DefaultWorkingDirectory)/DevOps_POC-v1.zip"
-#          rm -R -f "GC%20Integration"
-
-#- task: CmdLine@2
-#  name: Git_Commands
-#  displayName: Run Git to Push to Repo
-#  inputs:
-#    script: |
-#      git checkout $(input.Target_Branch) 2>/dev/null || git checkout -b $(input.Target_Branch)
-#          git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "Update Repo"
-#          git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push --set-upstream origin $(input.Target_Branch)
-
 - task: CmdLine@2
-  name: CMD_Logical
-  displayName: Testing Logical operators in Batch
+  name: Export_IICS
+  displayName: Run IICS Utility an Export into Staging Folder
   inputs:
     script: |
-      a=20
-      b=21
+      git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
+         chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
+          if [ $(input.Source_Environment) == "DEV" ]
+            then 
+              "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.DEV_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.DEV_Username)" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName).zip"
+            else if [ $(input.Source_Environment) == "SIT" ]
+              "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName).zip"
+            else 
+              echo "Can only process DEV and SIT Sources right now"
+              eixt 125
+            fi
+          rm -R -f "GC%20Integration"
 
-      if [ $a == $b ]
-      then
-        echo "a is equal to b"
-      else
-        echo "Test cases failed !!!"
-        exit 125
-      fi
+- task: CmdLine@2
+  name: Git_Commands
+  displayName: Run Git to Push to Repo
+  inputs:
+    script: |
+      git checkout $(input.Target_Branch) 2>/dev/null || git checkout -b $(input.Target_Branch)
+         git config --global user.email "thomas.righele@guycarp.com" && git config --global user.name "Thomas.Righele" && git add . && git commit -m "Update Repo"
+         if [ $(input.Target_Branch) == "master" ]
+          then
+            git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push
+          else
+            git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push --set-upstream origin $(input.Target_Branch)
+         fi
+
