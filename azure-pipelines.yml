@@ -27,7 +27,7 @@ steps:
               "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(input.IICS_ProjectFolderName).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(System.DefaultWorkingDirectory)/$(input.IICS_ProjectFolderName).zip"
             else 
               echo "Can only process DEV and SIT Sources right now"
-              eixt 125
+              exit 125
             fi
           rm -R -f "GC%20Integration"
 
