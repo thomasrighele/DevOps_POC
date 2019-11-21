@@ -44,5 +44,6 @@ steps:
       then
         echo "a is equal to b"
       else
-        raise error "Test cases failed !!!"
+        echo "Test cases failed !!!"
+        exit 125
       fi
