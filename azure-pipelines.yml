@@ -51,5 +51,5 @@ steps:
   inputs:
     script: |
       echo "User is: $(Build.QueuedBy)"
-      echo "Useremail is: "
+      echo "Useremail is: $(Build.RequestedForEmail)"
       echo "Repo Name is: $(Build.Repository.Name)"
