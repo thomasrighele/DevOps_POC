@@ -38,6 +38,6 @@ steps:
     command: publish
     publishDirectory: '$(Build.ArtifactStagingDirectory)'
     vstsFeedPublish: 'GC Integration/IICS_Packages'
-    vstsFeedPackagePublish: 'DevOps_POC'
+    vstsFeedPackagePublish: 'devops_poc'
     packagePublishDescription: 'Package downloaded from $(input.Source_Environment'
 
