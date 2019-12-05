@@ -6,14 +6,11 @@
 jobs:
 - job: A
 
-trigger:
-- master
+  pool:
+    vmImage: 'ubuntu-latest'
 
-pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  string: 'test' 
+  variables:
+    string: 'test' 
 
   steps:
   - checkout: self
@@ -28,14 +25,11 @@ variables:
 
 - job: B
 
-trigger:
-- master
+  pool:
+    vmImage: 'ubuntu-latest'
 
-pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  string: 'test' 
+  variables:
+    string: 'test' 
 
   steps:
   - checkout: self
@@ -43,7 +37,7 @@ variables:
 
   - task: CmdLine@2
     inputs:
-    script: 'echo Here is $(string)'
+      script: 'echo Here is $(string)'
 
 #- task: CmdLine@2
 #  name: Export_IICS
