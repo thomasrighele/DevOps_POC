@@ -3,6 +3,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+jobs:
+- job: A
+
 trigger:
 - master
 
@@ -12,9 +15,35 @@ pool:
 variables:
   string: 'test' 
 
-steps:
-- checkout: self
-  persistCredentials: true
+  steps:
+  - checkout: self
+    persistCredentials: true
+
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo Write your commands here
+        
+        echo Hello world
+
+- job: B
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  string: 'test' 
+
+  steps:
+  - checkout: self
+    persistCredentials: true
+
+  - task: CmdLine@2
+    inputs:
+    script: 'echo Here is $(string)'
 
 #- task: CmdLine@2
 #  name: Export_IICS
@@ -35,9 +64,7 @@ steps:
 #          fi
 #         rm -R -f "GC%20Integration"
 
-- task: CmdLine@2
-  inputs:
-    script: 'echo Here is $(string)'
+
 
 #- task: UniversalPackages@0
 #  displayName: Universal Publish
