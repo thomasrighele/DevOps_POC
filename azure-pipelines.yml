@@ -34,14 +34,10 @@ steps:
 
 - task: CmdLine@2
   name: Git_Commands
-  displayName: Run Git to Push to Repo
+  displayName: Publish Artifact
   inputs:
     script: |
-     git checkout $(input.Target_Branch) 2>/dev/null || git checkout -b $(input.Target_Branch)
-         git config --global user.email "$(Build.RequestedForEmail)" && git config --global user.name "$(Build.QueuedBy)" && git add . && git commit -m "$(input.commitnote)"
-         if [ $(input.Target_Branch) == "master" ]; then
-          git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push
-         else
-          git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push --set-upstream origin $(input.Target_Branch)
-         fi
+     az artifacts universal publish --organization https://guycarp.visualstudio.com/ --project="GC Integration" --scope project --feed IICS_Packages --name my-first-package --version 0.0.1 --description "Welcome to Universal Packages" --path "$(System.DefaultWorkingDirectory)"  
+
+
 
