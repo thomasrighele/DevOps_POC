@@ -32,9 +32,12 @@ steps:
           fi
          rm -R -f "GC%20Integration"
 
-- task: PublishBuildArtifacts@1
+- task: UniversalPackages@0
+  displayName: Universal Publish
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    command: publish
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    vstsFeedPublish: 'IICS_Packages'
+    vstsFeedPackagePublish: 'test'
+    packagePublishDescription: 'test'
 
