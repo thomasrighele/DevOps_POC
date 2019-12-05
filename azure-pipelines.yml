@@ -37,7 +37,7 @@ steps:
   inputs:
     command: publish
     publishDirectory: '$(Build.ArtifactStagingDirectory)'
-    vstsFeedPublish: 'IICS_Packages'
+    vstsFeedPublish: 'GC Integration/IICS_Packages'
     vstsFeedPackagePublish: 'test'
     packagePublishDescription: 'test'
 
