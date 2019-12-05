@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  string: 'test' 
+
 steps:
 - checkout: self
   persistCredentials: true
@@ -34,11 +37,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'set string=test'
-
-- task: CmdLine@2
-  inputs:
-    script: 'echo Here is the string %string%'
+    script: 'echo Here is $(string)'
 
 #- task: UniversalPackages@0
 #  displayName: Universal Publish
