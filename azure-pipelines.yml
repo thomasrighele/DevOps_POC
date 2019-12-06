@@ -13,9 +13,9 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      a="Hi all"
-      echo "${a,,}"
-     # echo "##vso[task.setvariable variable=FOO]%a%"
+      a=$(Release.DefinitionName)
+      a="${a,,}"
+      echo "##vso[task.setvariable variable=FOO]$a"
 
       
 
