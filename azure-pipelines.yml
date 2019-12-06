@@ -9,25 +9,25 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
 
-  variables:
-    string: 'test' 
-
   steps:
   - checkout: self
     persistCredentials: true
 
   - task: CmdLine@2
+    name: testVar
     inputs:
       script: |
         echo Hello_world
 
 - job: B
 
+  dependsOn: A
+
   pool:
     vmImage: 'ubuntu-latest'
 
   variables:
-    string: 'test' 
+    varFromA: $[ dependencies.A.outputs['testVar.MyVar'] ] 
 
   steps:
   - checkout: self
@@ -35,7 +35,7 @@ jobs:
 
   - task: CmdLine@2
     inputs:
-      script: 'echo Here is $(string)'
+      script: 'echo Here is $(varFromA)'
 
 #- task: CmdLine@2
 #  name: Export_IICS
