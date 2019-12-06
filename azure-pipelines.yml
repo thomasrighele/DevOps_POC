@@ -3,39 +3,23 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-jobs:
-- job: A
+pool:
+  vmImage: 'ubuntu-latest'
 
-  pool:
-    vmImage: 'ubuntu-latest'
+steps:
+- checkout: self
+  persistCredentials: true
 
-  steps:
-  - checkout: self
-    persistCredentials: true
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo "##vso[task.setvariable variable=FOO]some value"
 
-  - task: CmdLine@2
-    name: testVar
-    inputs:
-      script: |
-        echo Hello_world
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo This is a test $(FOO)
 
-- job: B
-
-  dependsOn: A
-
-  pool:
-    vmImage: 'ubuntu-latest'
-
-  variables:
-    varFromA: $[ dependencies.A.outputs['testVar.MyVar'] ] 
-
-  steps:
-  - checkout: self
-    persistCredentials: true
-
-  - task: CmdLine@2
-    inputs:
-      script: 'echo Here is $(varFromA)'
 
 #- task: CmdLine@2
 #  name: Export_IICS
