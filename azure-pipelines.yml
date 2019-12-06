@@ -13,7 +13,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      a=$(Release.DefinitionName)
+      a=$(Build.Repository.Name)
       a="${a,,}"
       echo "##vso[task.setvariable variable=FOO]$a"
 
