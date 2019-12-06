@@ -11,48 +11,39 @@ steps:
   persistCredentials: true
 
 - task: CmdLine@2
+  displayName: Grab Repo Name and Make it LowerCase
   inputs:
     script: |
       a=$(Build.Repository.Name)
       a="${a,,}"
-      echo "##vso[task.setvariable variable=FOO]$a"
+      echo "##vso[task.setvariable variable=REPONAME]$a"
 
       
-
-
 - task: CmdLine@2
+  name: Export_IICS
+  displayName: Run IICS Utility to Export IICS Package
   inputs:
     script: |
-      echo This is a test $(FOO)
+      git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
+         chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
+          if [ $(input.Source_Environment) == "DEV" ]; then
+            "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.DEV_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.DEV_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
+          else 
+           if [ $(input.Source_Environment) == "SIT" ]; then
+             "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
+            else 
+              echo "Can only process DEV and SIT Sources right now"
+              exit 125
+            fi
+          fi
+         rm -R -f "GC%20Integration"
 
-
-#- task: CmdLine@2
-#  name: Export_IICS
-#  displayName: Run IICS Utility an Export into Staging Folder
-#  inputs:
-#    script: |
-#      git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
-#         chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
-#          if [ $(input.Source_Environment) == "DEV" ]; then
-#            "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.DEV_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.DEV_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
-#          else 
-#           if [ $(input.Source_Environment) == "SIT" ]; then
-#             "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
-#            else 
-#              echo "Can only process DEV and SIT Sources right now"
-#              exit 125
-#            fi
-#          fi
-#         rm -R -f "GC%20Integration"
-
-
-
-#- task: UniversalPackages@0
-#  displayName: Universal Publish
-#  inputs:
-#    command: publish
-#    publishDirectory: '$(Build.ArtifactStagingDirectory)'
-#    vstsFeedPublish: 'GC Integration/IICS_Packages'
-#    vstsFeedPackagePublish: 'devops_poc'
-#    packagePublishDescription: 'Package downloaded from $(input.Source_Environment)'
+- task: UniversalPackages@0
+  displayName: Universal Publish Artifact
+  inputs:
+    command: publish
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    vstsFeedPublish: 'GC Integration/IICS_Packages'
+    vstsFeedPackagePublish: $(REPONAME)
+    packagePublishDescription: 'Package downloaded from $(input.Source_Environment)'
 
