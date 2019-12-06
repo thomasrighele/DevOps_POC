@@ -31,12 +31,13 @@ steps:
           else 
            if [ $(input.Source_Environment) == "PRE" ]; then
              "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.PRE_Password)" --podHostName "dmr-us.informaticacloud.com" --region "us" --username "$(iicscred.PRE_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
-          else 
-           if [ $(input.Source_Environment) == "SIT" ]; then
-             "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
             else 
-              echo "Can only process DEV and SIT Sources right now"
-              exit 125
+            if [ $(input.Source_Environment) == "SIT" ]; then
+              "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
+              else 
+                echo "Can only process DEV and SIT Sources right now"
+                exit 125
+              fi
             fi
           fi
          rm -R -f "GC%20Integration"
