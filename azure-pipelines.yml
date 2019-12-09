@@ -45,12 +45,19 @@ steps:
           fi
          rm -R -f "GC%20Integration"
 
-- task: UniversalPackages@0
-  displayName: Universal Publish Artifact
-  inputs:
-    command: publish
-    publishDirectory: '$(Build.ArtifactStagingDirectory)'
-    vstsFeedPublish: 'GC Integration/IICS_Packages'
-    vstsFeedPackagePublish: $(REPONAME)
-    packagePublishDescription: 'Package downloaded from $(input.Source_Environment)'
+#- task: UniversalPackages@0
+#  displayName: Universal Publish Artifact
+#  inputs:
+#    command: publish
+#    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+#    vstsFeedPublish: 'GC Integration/IICS_Packages'
+#    vstsFeedPackagePublish: $(REPONAME)
+#    packagePublishDescription: 'Package downloaded from $(input.Source_Environment)'
 
+- task: cURLUploader@2
+  inputs:
+    files: '$(Build.ArtifactStagingDirectory)'
+    authType: 'UserAndPass'
+    username: 'svc-gciics-repo'
+    password: 'gaxDek-jysjuc-5tifpe'
+    url: 'https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics/$(Build.Repository.Name).zip'
