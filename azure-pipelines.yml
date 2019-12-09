@@ -66,5 +66,5 @@ steps:
   displayName: Test Curl command
   inputs:
     script: |
-      curl -u<svc-gciics-repo>:<gaxDek-jysjuc-5tifpe> -T $(Build.ArtifactStagingDirectory) "https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics/$(Build.Repository.Name).zip"
+      curl -u svc-gciics-repo:gaxDek-jysjuc-5tifpe -T $(Build.ArtifactStagingDirectory) "https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics/$(Build.Repository.Name).zip"
 
