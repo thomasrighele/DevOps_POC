@@ -58,4 +58,4 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      curl -v http://google.com/
+      curl -v https://artifactory.nasa.azu.mrshmc.com
