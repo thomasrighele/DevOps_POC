@@ -5,13 +5,37 @@
 
 trigger:
 - master
+- release/*
 
+variables:
+- group: artifactory_vars
+
+#pool:
+#  vmImage: 'ubuntu-latest'
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Default
+  demands:
+  - agent.name -equals gcnl-blag-rayfg-build
 
-steps:
-- checkout: self
-  persistCredentials: true
+#steps:
+#- checkout: self
+#  persistCredentials: true
+
+jobs:
+- job: 'Connect_Artifactory'
+  pool:
+    name: Default
+    demands:
+    - agent.name -equals gcnl-blag-rayfg-build
+  steps:
+  - task: Shellpp@0
+    inputs:
+      type: 'InlineScript'
+      script: |
+        touch filepoc.zip
+        curl -k -u$(artifactory_username):$(artifactory_password) -T filepoc.zip "https://$(artifactory_registry)/new/"
+    displayName: 'run client tests'
+
 
 #- task: CmdLine@2
 #  displayName: Grab Repo Name and Make it LowerCase
@@ -55,7 +79,7 @@ steps:
 #    packagePublishDescription: 'Package downloaded from $(input.Source_Environment)'
 
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      curl -v https://artifactory.nasa.azu.mrshmc.com
+#- task: CmdLine@2
+#  inputs:
+#    script: |
+#      curl -v https://artifactory.nasa.azu.mrshmc.com
