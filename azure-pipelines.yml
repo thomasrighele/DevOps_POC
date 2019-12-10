@@ -58,4 +58,4 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      curl -usvc-gciics-repo:AP6ttioXYyYkCnXBrJFUSFPUJcxp6DT48NTK8m -T $(Build.ArtifactStagingDirectory) "https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics/$(Build.Repository.Name).zip"
+      curl "https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics/$(Build.Repository.Name).zip" -v
