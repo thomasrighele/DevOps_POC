@@ -54,8 +54,4 @@ steps:
 #    vstsFeedPackagePublish: $(REPONAME)
 #    packagePublishDescription: 'Package downloaded from $(input.Source_Environment)'
 
-- task: cURLUploader@2
-  inputs:
-    files: '$(Build.ArtifactStagingDirectory)'
-    serviceEndpoint: 'jfog_artifactory'
 
