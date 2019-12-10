@@ -57,4 +57,4 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'curl https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics -v'
+    script: 'curl https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics --insecure'
