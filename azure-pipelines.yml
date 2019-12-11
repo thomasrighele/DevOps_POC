@@ -17,45 +17,40 @@ pool:
   - agent.name -equals gcnl-blag-rayfg-build
 
 
-jobs:
-#- job: 'Download_IICS_Package'
+#jobs:
+#- job: 'Connect_Artifactory'
 #  pool:
-#    vmImage: 'ubuntu-latest'
-#  steps:
-
-- job: 'Connect_Artifactory'
-  pool:
-    name: Default
-    demands:
-    - agent.name -equals gcnl-blag-rayfg-build
-  steps:
-  - task: CmdLine@2
-    name: Export_IICS
-    displayName: Run IICS Utility to Export IICS Package
-    inputs:
-      script: |
-        git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
-          chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
-            if [ $(input.Source_Environment) == "DEV" ]; then
-              "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.DEV_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.DEV_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
+#    name: Default
+#    demands:
+#    - agent.name -equals gcnl-blag-rayfg-build
+steps:
+- task: CmdLine@2
+  name: Export_IICS
+  displayName: Run IICS Utility to Export IICS Package
+  inputs:
+    script: |
+      git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
+        chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
+          if [ $(input.Source_Environment) == "DEV" ]; then
+            "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.DEV_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.DEV_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
+          else 
+          if [ $(input.Source_Environment) == "PRE" ]; then
+            "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.PRE_Password)" --podHostName "dmr-us.informaticacloud.com" --region "us" --username "$(iicscred.PRE_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
             else 
-            if [ $(input.Source_Environment) == "PRE" ]; then
-              "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.PRE_Password)" --podHostName "dmr-us.informaticacloud.com" --region "us" --username "$(iicscred.PRE_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
+            if [ $(input.Source_Environment) == "SIT" ]; then
+              "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
               else 
-              if [ $(input.Source_Environment) == "SIT" ]; then
-                "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.SIT_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.SIT_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
-                else 
-                echo "Can only process DEV and SIT Sources right now"
-                  exit 125
-                fi
+              echo "Can only process DEV and SIT Sources right now"
+                exit 125
               fi
-          fi
-          rm -R -f "GC%20Integration"
-  - task: Shellpp@0
-    inputs:
-      type: 'InlineScript'
-      script: |
-        curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/"
-    displayName: 'run client tests'
+            fi
+        fi
+        rm -R -f "GC%20Integration"
+- task: Shellpp@0
+  inputs:
+    type: 'InlineScript'
+    script: |
+      curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/"
+  displayName: 'Upload to Artifactory'
 
 
