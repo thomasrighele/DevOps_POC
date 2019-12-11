@@ -18,9 +18,16 @@ pool:
 
 
 jobs:
-- job: 'Download_IICS_Package'
+#- job: 'Download_IICS_Package'
+#  pool:
+#    vmImage: 'ubuntu-latest'
+#  steps:
+
+- job: 'Connect_Artifactory'
   pool:
-    vmImage: 'ubuntu-latest'
+    name: Default
+    demands:
+    - agent.name -equals gcnl-blag-rayfg-build
   steps:
   - task: CmdLine@2
     name: Export_IICS
@@ -44,13 +51,6 @@ jobs:
               fi
           fi
           rm -R -f "GC%20Integration"
-
-- job: 'Connect_Artifactory'
-  pool:
-    name: Default
-    demands:
-    - agent.name -equals gcnl-blag-rayfg-build
-  steps:
   - task: Shellpp@0
     inputs:
       type: 'InlineScript'
