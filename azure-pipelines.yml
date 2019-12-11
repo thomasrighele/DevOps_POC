@@ -55,7 +55,7 @@ jobs:
     inputs:
       type: 'InlineScript'
       script: |
-        curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory) "https://$(artifactory_registry)/"
+        curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/"
     displayName: 'run client tests'
 
 
