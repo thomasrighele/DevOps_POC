@@ -47,10 +47,9 @@ steps:
     script: |
       curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip"
 
-
 - task: Delay@1
   inputs:
-    delayForMinutes: '0.10'
+    delayForMinutes: '1'
 
 - task: Shellpp@0
   displayName: 'Update Artifact Properties'
