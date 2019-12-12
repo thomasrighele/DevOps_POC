@@ -45,14 +45,14 @@ steps:
   inputs:
     type: 'InlineScript'
     script: |
-      curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip"
+      curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip;Environment=$(input.Source_Environment)"
       sleep 5
 
 
 
-- task: Shellpp@0
-  displayName: 'Update Artifact Properties'
-  inputs:
-    type: 'InlineScript'
-    script: 'curl -u$(artifactory_username):$(artifactory_password) -X PUT "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip?properties=Environment=$(input.Source_Environment)"'
+#- task: Shellpp@0
+#  displayName: 'Update Artifact Properties'
+#  inputs:
+#    type: 'InlineScript'
+#    script: 'curl -u$(artifactory_username):$(artifactory_password) -X PUT "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip?properties=Environment=$(input.Source_Environment)"'
 
