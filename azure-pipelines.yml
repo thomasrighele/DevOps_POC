@@ -50,7 +50,7 @@ steps:
   inputs:
     type: 'InlineScript'
     script: |
-      curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/"
+      curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/$(Build.Repository.Name)/Package-1.0.zip"
   displayName: 'Upload to Artifactory'
 
 
