@@ -51,7 +51,7 @@ steps:
   inputs:
     type: 'InlineScript'
     script: |
-      curl -u$(artifactory_username):$(artifactory_password) -X PUT "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip?properties=os=win"
+      curl -u$(artifactory_username):$(artifactory_password) -X PUT "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip?properties=Environment=$(input.Source_Environment)"
   displayName: 'Update Artifact Properties'
 
 
