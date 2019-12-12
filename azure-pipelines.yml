@@ -17,12 +17,6 @@ pool:
   - agent.name -equals gcnl-blag-rayfg-build
 
 
-#jobs:
-#- job: 'Connect_Artifactory'
-#  pool:
-#    name: Default
-#    demands:
-#    - agent.name -equals gcnl-blag-rayfg-build
 steps:
 - task: CmdLine@2
   name: Export_IICS
