@@ -1,1 +1,1 @@
-dir $SystemDefaultWorkingDirectory/_DevOps_POC
+dir $SystemArtifactsDirectory
