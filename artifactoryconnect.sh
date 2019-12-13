@@ -1,1 +1,1 @@
-echo This is the test: "$1"
+curl -k -u "svc-gciics-repo:gaxDek-jysjuc-5tifpe" --remote-name "https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics/DevOps_POC/Package_$1.zip" -o "$2"
