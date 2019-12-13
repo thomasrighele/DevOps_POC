@@ -1,5 +1,3 @@
 #!/bin/sh
-##
-echo This is $test;
-##
-echo This is 2;
+echo This is $test \
+echo This is 2
