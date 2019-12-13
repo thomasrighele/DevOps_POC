@@ -1,0 +1,1 @@
+curl -k -u "svc-gciics-repo:gaxDek-jysjuc-5tifpe" --remote-name "https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics/DevOps_POC/Package_$(Build.BuildNumber).zip" -o $(System.ArtifactsDirectory)
