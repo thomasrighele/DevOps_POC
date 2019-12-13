@@ -1,1 +1,1 @@
-dir $SystemDefaultWorkingDirectory
+dir $SystemDefaultWorkingDirectory/_DevOps_POC
