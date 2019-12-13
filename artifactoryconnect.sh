@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 curl -k -u "$1:$2" --remote-name "https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics/DevOps_POC/Package_$3.zip" -o "$4"
 
