@@ -52,5 +52,5 @@ steps:
   inputs:
     type: 'InlineScript'
     script: |
-      echo $("iicscred.Password_$(input.Source_Environment)")
+      echo $(iicscred.Password_$(input.Source_Environment))
 
