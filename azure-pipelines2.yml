@@ -26,11 +26,42 @@ steps:
   inputs:
     script: |
       if [ $(input.Source_Environment) == "DEV" ]; then
-        echo "##vso[task.setvariable variable=iicsusername]$(iics_cred.Username_DEV)"
-        echo "##vso[task.setvariable variable=iicspassword]$(iics_cred.Password_DEV)"
+        echo "##vso[task.setvariable variable=iicsusername]$(iicscred.Username_DEV)"
+        echo "##vso[task.setvariable variable=iicspassword]$(iicscred.Password_DEV)"
+        echo "##vso[task.setvariable variable=podHostName]dm-us.informaticacloud.com"
       else
-        echo "##vso[task.setvariable variable=iicsusername]$(iics_cred.Username_PRE)"
-        echo "##vso[task.setvariable variable=iicspassword]$(iics_cred.Password_PRE)"
+        if [ $(input.Source_Environment) == "PRE" ]; then
+          echo "##vso[task.setvariable variable=iicsusername]$(iicscred.Username_PRE)"
+          echo "##vso[task.setvariable variable=iicspassword]$(iicscred.Password_PRE)"
+          echo "##vso[task.setvariable variable=podHostName]dmr-us.informaticacloud.com"
+        else
+          if [ $(input.Source_Environment) == "SIT" ]; then
+            echo "##vso[task.setvariable variable=iicsusername]$(iicscred.Username_SIT)"
+            echo "##vso[task.setvariable variable=iicspassword]$(iicscred.Password_SIT)"
+            echo "##vso[task.setvariable variable=podHostName]dm-us.informaticacloud.com"
+          else
+            if [ $(input.Source_Environment) == "QA" ]; then
+              echo "##vso[task.setvariable variable=iicsusername]$(iicscred.Username_QA)"
+              echo "##vso[task.setvariable variable=iicspassword]$(iicscred.Password_QA)"
+              echo "##vso[task.setvariable variable=podHostName]dm-us.informaticacloud.com"
+            else
+              if [ $(input.Source_Environment) == "PPD" ]; then 
+                echo "##vso[task.setvariable variable=iicsusername]$(iicscred.Username_PPD)"
+                echo "##vso[task.setvariable variable=iicspassword]$(iicscred.Password_PPD)"
+                echo "##vso[task.setvariable variable=podHostName]dm-us.informaticacloud.com"
+              else
+                if [ $(input.Source_Environment) == "PROD" ]; then
+                  echo "##vso[task.setvariable variable=iicsusername]$(iicscred.Username_PROD)"
+                  echo "##vso[task.setvariable variable=iicspassword]$(iicscred.Password_PROD)"
+                  echo "##vso[task.setvariable variable=podHostName]dm-us.informaticacloud.com" 
+                else
+                  echo "Valid environment not selected at Build Runtime"
+                  exit 125
+                fi
+              fi
+            fi
+          fi
+        fi  
       fi
 - task: CmdLine@2
   name: TomTest2
