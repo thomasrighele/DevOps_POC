@@ -59,7 +59,8 @@ steps:
 
 # Create a variable
 - bash: |
-    echo "##vso[task.setvariable variable=sauce]$(iicscred.Password_DEV)"
+    a=iicscred.Password_$(input.Source_Environment)
+    echo "##vso[task.setvariable variable=sauce]$($a)"
 
 # Use the variable
 # "$(sauce)" is replaced by the contents of the `sauce` variable by Azure Pipelines
