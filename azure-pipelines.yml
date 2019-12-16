@@ -9,6 +9,7 @@ trigger:
 
 variables:
 - group: artifactory_vars
+- group: azure_creds
 
 
 pool:
