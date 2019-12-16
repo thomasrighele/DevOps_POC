@@ -52,7 +52,5 @@ steps:
   inputs:
     type: 'InlineScript'
     script: |
-      echo $(artifactory_username) 
-      echo $(artifactory_password) 
-      echo $(iicscred.Password_DEV)
-      echo $(azure_username)
+      a=iicscred.Password_$(input.Source_Environment)
+      echo $a
