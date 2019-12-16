@@ -54,4 +54,4 @@ steps:
     script: |
       a=$(input.Source_Environment)
       a=Password_$a
-      echo $a
+      echo $($a)
