@@ -47,22 +47,10 @@ steps:
 #    script: |
 #      curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip;Environment=$(input.Source_Environment)"
 
-#- task: Shellpp@0
-#  displayName: 'TomTest'
-#  inputs:
-#    type: 'InlineScript'
-#    script: |
-#      a=iicscred.Password_$(input.Source_Environment)
-#      echo $a
-#     echo $(iicscred.Password_DEV)
-#      echo $(['$a'])
+- task: Shellpp@0
+  displayName: 'TomTest'
+  inputs:
+    type: 'InlineScript'
+    script: |
+      echo $("iicscred.Password_$(input.Source_Environment)")
 
-# Create a variable
-- bash: |
-    echo "##vso[task.setvariable variable=sauce]$(iicscred.Password_$(input.Source_Environment))"
-
-# Use the variable
-# "$(sauce)" is replaced by the contents of the `sauce` variable by Azure Pipelines
-# before handing the body of the script to the shell.
-- bash: |
-    echo my pipeline variable is $(sauce)
