@@ -3,7 +3,11 @@
 
 #Setting Variables
 env="${ReleaseEnvironmentName// Promotion/}"
-echo $env
+if ["env" == PRE ]
+ then podHostName="dmr-us.informaticacloud.com"
+ else podHostName="dm-us.informaticacloud.com"
+fi
+echo $podHostName
 
 # Download Package from Artifactory that is associated with the Build into the Working Directory
 #curl -k -u "$artifactory_username:$artifactory_password" --remote-name "https://artifactory.nasa.azu.mrshmc.com/artifactory/gciics/DevOps_POC/Package_$BuildBuildNumber.zip" -o "$SystemArtifactsDirectory"
