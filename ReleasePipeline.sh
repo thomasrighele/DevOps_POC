@@ -2,7 +2,7 @@
 # Azure Release Pipeline Script
 
 #Setting Variables
-env="${SystemStageName// Promotion/}"
+env="${SystemStageDisplayName// Promotion/}"
 echo $env
 
 # Download Package from Artifactory that is associated with the Build into the Working Directory
