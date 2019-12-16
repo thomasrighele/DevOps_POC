@@ -23,7 +23,7 @@ steps:
   displayName: Run IICS Utility to Export IICS Package
   inputs:
     script: |
-      git clone "https://Thomas.Righele:wsm7mv4mjik3zxjlyarwyvmfbgx6n3wsjxdenit5y5tqrwyjchkq@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
+      git clone "https://$(azure_username):$(azure_password)@guycarp.visualstudio.com/GC%20Integration/_git/GC%20Integration"
         chmod +x "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux"
           if [ $(input.Source_Environment) == "DEV" ]; then
             "$(System.DefaultWorkingDirectory)/GC%20Integration/IICS Asset Management Utility/iics_linux" export --artifacts "Explore/$(Build.Repository.Name).Project" --name "AzureDevops_Build-$(Build.BuildNumber)" --password "$(iicscred.DEV_Password)" --podHostName "dm-us.informaticacloud.com" --region "us" --username "$(iicscred.DEV_Username)" --zipFilePath "$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip"
@@ -46,12 +46,4 @@ steps:
     type: 'InlineScript'
     script: |
       curl -k -u$(artifactory_username):$(artifactory_password) -T $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip;Environment=$(input.Source_Environment)"
-
-
-
-#- task: Shellpp@0
-#  displayName: 'Update Artifact Properties'
-#  inputs:
-#    type: 'InlineScript'
-#    script: 'curl -u$(artifactory_username):$(artifactory_password) -X PUT "https://$(artifactory_registry)/$(Build.Repository.Name)/Package_$(Build.BuildNumber).zip?properties=Environment=$(input.Source_Environment)"'
 
