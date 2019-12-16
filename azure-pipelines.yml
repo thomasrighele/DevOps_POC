@@ -55,3 +55,4 @@ steps:
       a=iicscred.Password_$(input.Source_Environment)
       echo $a
       echo $(iicscred.Password_DEV)
+      echo $(['$a'])
