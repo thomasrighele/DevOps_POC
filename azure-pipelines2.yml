@@ -21,7 +21,7 @@ pool:
 
 steps:
 - task: CmdLine@2
-  name: Export_IICS
+  name: TomTest1
   displayName: Run IICS Utility to Export IICS Package
   inputs:
     script: |
@@ -33,7 +33,7 @@ steps:
         echo "##vso[task.setvariable variable=iicspassword]$(iics_cred.Password_PRE)"
       fi
 - task: CmdLine@2
-  name: Export_IICS
+  name: TomTest2
   displayName: Run IICS Utility to Export IICS Package
   inputs:
     script: |
