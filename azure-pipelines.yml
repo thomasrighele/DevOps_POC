@@ -52,5 +52,6 @@ steps:
   displayName: 'TomTest 2'
   inputs:
     script: |
-      a=Password_$(input.Source_Environment)
+      a=$(input.Source_Environment)
+      a=Password_$a
       echo $a
