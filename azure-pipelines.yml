@@ -53,4 +53,5 @@ steps:
     type: 'InlineScript'
     script: |
       a=iicscred.Password_$(input.Source_Environment)
-      echo $(%a%)
+      echo $a
+      echo $(iicscred.Password_DEV)
