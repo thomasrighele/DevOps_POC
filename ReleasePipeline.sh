@@ -3,7 +3,7 @@
 
 #Setting Variables
 env="${ReleaseEnvironmentName// Promotion/}"
-if ["env" == PRE ]
+if ["$env" == PRE ]
  then podHostName="dmr-us.informaticacloud.com"
  else podHostName="dm-us.informaticacloud.com"
 fi
