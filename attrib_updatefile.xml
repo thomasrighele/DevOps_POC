@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<attribupdatefile>
+	<configuration>
+		<environment>DEV</environment>
+		<connection>
+			<name>connSC-IICSRestAPI</name>
+			<attributes>
+				<varname>hostname1</varname>
+				<varvalue>tomtest6-modifiedA</varvalue>
+			</attributes>
+			<attributes>
+				<varname>hostname2</varname>
+				<varvalue>tomtest6-modifiedB</varvalue>
+			</attributes>		
+		</connection>
+	</configuration>
+	<configuration>
+		<environment>SIT</environment>
+		<connection>
+			<name>connSC-IICSRestAPI</name>
+			<attributes>
+				<varname>hostname1</varname>
+				<varvalue>tomtest6-modifiedC</varvalue>
+			</attributes>
+			<attributes>
+				<varname>hostname2</varname>
+				<varvalue>tomtest6-modifiedD</varvalue>
+			</attributes>		
+		</connection>
+	</configuration>	
+</attribupdatefile>
