@@ -4,11 +4,13 @@
 import sys
 import xml.etree.ElementTree as ET
 
-## Attribute XML File
-attribupdatefile='C:\\Users\\U1198680\\Downloads\\icaitest\\attrib_updatefile.xml'
-
 ## Variables to be passed in
 ENV=sys.argv[1]
+XMLDir=sys.argv[2]
+ProjectName=sys.argv[3]
+
+## Attribute XML File
+attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
 
 ## Functions below to update the namespace
 ## http://effbot.org/zone/element-namespaces.htm
