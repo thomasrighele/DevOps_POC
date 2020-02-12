@@ -12,7 +12,12 @@ ArtDir=sys.argv[4]
 
 ## Attribute XML File
 attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
-print(attribupdatefile)
+
+############################# TEST #############################
+xmlfile = ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml'
+with open(xmlfile, 'r') as fin:
+    print(fin.read())
+############################# TEST #############################    
 
 ## Functions below to update the namespace
 ## http://effbot.org/zone/element-namespaces.htm
