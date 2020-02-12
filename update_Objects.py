@@ -76,10 +76,9 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                 'ns0': 'http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd'}
 
             
-            for Item in root.findall('aetgt:Item'):
+            for Item in root.findall('types1:Item', ns):
                 ## Update the Namespace for the items in the Item tag
                 set_prefixes(Item, dict(types1="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd"))
-                ET.dump(tree)
                 ## Update the value within the attributes tag
                 for Entry in Item.find('types1:Entry'):
                     ## Iterate on attributes in attribute file
