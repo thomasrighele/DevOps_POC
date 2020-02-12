@@ -64,7 +64,7 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
             connname = connection.find('name').text
 
             ## Parse Informatica's extracted XML File for the connection   
-            tree = ET.parse(ArtDir + 'Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
+            tree = ET.parse(ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
             root = tree.getroot()
 
 
@@ -95,5 +95,5 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                         set_prefixes(businessConnector, dict(c="http://schemas.informatica.com/appmodules/screenflow/2014/04/avosConnectors.xsd"))
 
             ## Output the file
-            ##tree.write(ArtDir + 'Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
+            ##tree.write(ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
             ET.dump(tree)
