@@ -81,12 +81,12 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                 set_prefixes(Item, dict(types1="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd"))
 
                 ############################# TEST #############################
-                ET.dump(tree)
+                print(Item.items())
                 ############################# TEST #############################   
 
 
                 ## Update the value within the attributes tag
-                for Entry in Item.find('{http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd}Entry'):
+                for Entry in Item.find('types1:Entry'):
                     ## Iterate on attributes in attribute file
                     for attributes in connection.iter('attributes'):
                         varname = attributes.find('varname').text
