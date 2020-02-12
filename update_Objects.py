@@ -14,7 +14,7 @@ ArtDir=sys.argv[4]
 attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
 
 ############################# TEST #############################
-xmlfile = ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml'
+xmlfile = ArtDir + '/Explore/' + ProjectName + '/Connections/connSC-IICSRestAPI.AI_CONNECTION.xml'
 with open(xmlfile, 'r') as fin:
     print(fin.read())
 ############################# TEST #############################    
