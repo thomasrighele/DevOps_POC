@@ -81,7 +81,7 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                 set_prefixes(Item, dict(types1="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd"))
 
                 ############################# TEST #############################
-                print(Item.find('types1:Entry', ns))
+                print(Item.find('types1:Entry', namespaces=ns))
                 ############################# TEST #############################   
 
 
