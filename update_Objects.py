@@ -92,5 +92,4 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                         set_prefixes(businessConnector, dict(c="http://schemas.informatica.com/appmodules/screenflow/2014/04/avosConnectors.xsd"))
 
             ## Output the file
-            ##tree.write(ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
-            ET.dump(tree)
+            tree.write(ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
