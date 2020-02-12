@@ -81,7 +81,7 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                 ## Update the value within the attributes tag
                 for Entry in Item.find('types1:Entry'):
                     ## Iterate on attributes in attribute file
-                    ET.dump(tree)
+                    print(tree)
                     for attributes in connection.iter('attributes'):
                         varname = attributes.find('varname').text
                         varvalue = attributes.find('varvalue').text
