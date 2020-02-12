@@ -13,12 +13,6 @@ ArtDir=sys.argv[4]
 ## Attribute XML File
 attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
 
-############################# TEST #############################
-xmlfile = ArtDir + '/Explore/' + ProjectName + '/Connections/connSC-IICSRestAPI.AI_CONNECTION.xml'
-with open(xmlfile, 'r') as fin:
-    print(fin.read())
-############################# TEST #############################    
-
 ## Functions below to update the namespace
 ## http://effbot.org/zone/element-namespaces.htm
 def set_prefixes(elem, prefix_map):
@@ -85,6 +79,12 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
             for Item in root.findall('types1:Item', ns):
                 ## Update the Namespace for the items in the Item tag
                 set_prefixes(Item, dict(types1="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd"))
+
+                ############################# TEST #############################
+                ET.dump(tree)
+                ############################# TEST #############################   
+
+
                 ## Update the value within the attributes tag
                 for Entry in Item.find('types1:Entry', ns):
                     ## Iterate on attributes in attribute file
