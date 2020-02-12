@@ -66,7 +66,7 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
             ## Parse Informatica's extracted XML File for the connection   
             tree = ET.parse(ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
             root = tree.getroot()
-
+            ET.dump(tree)
 
             ## Register the main namespace
             ET.register_namespace('aetgt', "http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd")
@@ -81,7 +81,6 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                 ## Update the value within the attributes tag
                 for Entry in Item.find('types1:Entry'):
                     ## Iterate on attributes in attribute file
-                    print(tree)
                     for attributes in connection.iter('attributes'):
                         varname = attributes.find('varname').text
                         varvalue = attributes.find('varvalue').text
