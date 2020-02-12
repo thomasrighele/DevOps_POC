@@ -12,6 +12,7 @@ ArtDir=sys.argv[4]
 
 ## Attribute XML File
 attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
+print(attribupdatefile)
 
 ## Functions below to update the namespace
 ## http://effbot.org/zone/element-namespaces.htm
