@@ -71,33 +71,19 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
             ## Register the main namespace
             ET.register_namespace('aetgt', "http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd")
 
-            ## Declare namespace
-            ns = {'types1': 'http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd',
-                'ns0': 'http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd'}
-
-            
-            for Item in root.findall('types1:Item', ns):
+            for Item in root.iter('{http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd}Item'):
                 ## Update the Namespace for the items in the Item tag
                 set_prefixes(Item, dict(types1="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd"))
-
-                ############################# TEST #############################
-                ###print(Item.find('types1:Entry'))
-                children = Item.getchildren()
-                for child in children:
-                    print(child)
-
-                ############################# TEST #############################   
-
-
                 ## Update the value within the attributes tag
-                for Entry in Item.find('types1:Entry'):
+                for Entry in Item.iter('types1:Entry'):
                     ## Iterate on attributes in attribute file
-                    for attributes in connection.iter('attributes'):
-                        varname = attributes.find('varname').text
-                        varvalue = attributes.find('varvalue').text
-                        attributes = Entry.find('ns0:attributes', ns)
-                        attribute = attributes.find('ns0:attribute[@name="'+varname+'"]', ns)
-                        attribute.set('value',varvalue)
+                    for connections in Entry.iter('{http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd}connection'):
+                        for attributes in connection.iter('attributes'):
+                            varname = attributes.find('varname').text
+                            varvalue = attributes.find('varvalue').text
+                            attributes = connections.find('{http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd}attributes')
+                            attribute = attributes.find('{http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd}attribute[@name="'+varname+'"]')
+                            attribute.set('value',varvalue)
                 ## Update the namespace to match the original
                 for Entry in Item.iter('types1:Entry'):
                     for connection in Entry.iter('{http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd}connection'):
