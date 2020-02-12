@@ -8,6 +8,7 @@ import xml.etree.ElementTree as ET
 ENV=sys.argv[1]
 XMLDir=sys.argv[2]
 ProjectName=sys.argv[3]
+ArtDir=sys.argv[4]
 
 ## Attribute XML File
 attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
@@ -63,7 +64,7 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
             connname = connection.find('name').text
 
             ## Parse Informatica's extracted XML File for the connection   
-            tree = ET.parse('C:\\Users\\U1198680\\Downloads\\icaitest\\DevOps_POC\\Explore\\DevOps_POC\\Connections\\'+ connname +'.AI_CONNECTION.xml')
+            tree = ET.parse(ArtDir + 'Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
             root = tree.getroot()
 
 
@@ -94,4 +95,5 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                         set_prefixes(businessConnector, dict(c="http://schemas.informatica.com/appmodules/screenflow/2014/04/avosConnectors.xsd"))
 
             ## Output the file
-            tree.write('C:\\Users\\U1198680\\Downloads\\icaitest\\DevOps_POC\\Explore\\DevOps_POC\\Connections\\'+ connname +'.AI_CONNECTION.xml')
+            ##tree.write(ArtDir + 'Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
+            ET.dump(tree)
