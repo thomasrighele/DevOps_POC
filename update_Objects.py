@@ -66,7 +66,7 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
             ## Parse Informatica's extracted XML File for the connection   
             tree = ET.parse(ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
             root = tree.getroot()
-            ET.dump(tree)
+
 
             ## Register the main namespace
             ET.register_namespace('aetgt', "http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd")
@@ -75,6 +75,7 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
             ns = {'types1': 'http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd',
                 'ns0': 'http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd'}
 
+            ET.dump(tree)
             for Item in root.findall('types1:Item', ns):
                 ## Update the Namespace for the items in the Item tag
                 set_prefixes(Item, dict(types1="http://schemas.active-endpoints.com/appmodules/repository/2010/10/avrepository.xsd"))
