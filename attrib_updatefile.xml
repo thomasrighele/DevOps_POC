@@ -20,11 +20,11 @@
 			<name>connSC-IICSRestAPI</name>
 			<attributes>
 				<varname>hostname1</varname>
-				<varvalue>tomtest8-modifiedC</varvalue>
+				<varvalue>tomtest9-modifiedC</varvalue>
 			</attributes>
 			<attributes>
 				<varname>hostname2</varname>
-				<varvalue>tomtest8-modifiedD</varvalue>
+				<varvalue>tomtest9-modifiedD</varvalue>
 			</attributes>		
 		</connection>
 	</configuration>	
