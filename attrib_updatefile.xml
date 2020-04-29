@@ -3,29 +3,21 @@
 	<configuration>
 		<environment>DEV</environment>
 		<connection>
-			<name>connSC-IICSRestAPI</name>
+			<name>connSC-DevOps-RequestBin</name>
 			<attributes>
-				<varname>hostname1</varname>
-				<varvalue>tomtest1-DEV</varvalue>
+				<varname>hostname</varname>
+				<varvalue>enenri74v4tw</varvalue>
 			</attributes>
-			<attributes>
-				<varname>hostname2</varname>
-				<varvalue>tomtest2-DEV</varvalue>
-			</attributes>		
 		</connection>
 	</configuration>
 	<configuration>
 		<environment>SIT</environment>
 		<connection>
-			<name>connSC-IICSRestAPI</name>
+			<name>connSC-DevOps-RequestBin</name>
 			<attributes>
-				<varname>hostname1</varname>
-				<varvalue>tomtest1-SIT</varvalue>
+				<varname>hostname</varname>
+				<varvalue>envck9ti0o1br</varvalue>
 			</attributes>
-			<attributes>
-				<varname>hostname2</varname>
-				<varvalue>tomtest2-SIT</varvalue>
-			</attributes>		
 		</connection>
 	</configuration>	
 </attribupdatefile>
