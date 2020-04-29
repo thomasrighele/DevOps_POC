@@ -14,9 +14,6 @@ VAR2=sys.argv[6]
 VAR3=sys.argv[7]
 VAR4=sys.argv[8]
 VAR5=sys.argv[9]
-sa_kcenter_useraccount=VAR1
-sa_kcenter_userpassword=VAR2
-okta_api_key=VAR3
 
 ## Attribute XML File
 attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
@@ -107,7 +104,7 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                 ## Output the file
                 tree.write(ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
 
-            elif connname == 'connConnector-Salesforce':
+            elif connname == 'connConnectorTEST-Salesforce':
                 ## Parse Informatica's extracted XML File for the connection   
                 tree = ET.parse(ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
                 root = tree.getroot()
