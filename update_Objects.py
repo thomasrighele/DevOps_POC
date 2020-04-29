@@ -67,7 +67,7 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
     if environment == ENV:
         for connection in configuration.iter('connection'):
             connname = connection.find('name').text
-            if connname != 'connConnector-Salesforce':
+            if connname != 'connConnectorTEST-Salesforce':
                 ## Parse Informatica's extracted XML File for the connection   
                 tree = ET.parse(ArtDir + '/Explore/' + ProjectName + '/Connections/'+ connname +'.AI_CONNECTION.xml')
                 root = tree.getroot()
