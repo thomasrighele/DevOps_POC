@@ -9,6 +9,11 @@ ENV=sys.argv[1]
 XMLDir=sys.argv[2]
 ProjectName=sys.argv[3]
 ArtDir=sys.argv[4]
+VAR1=sys.argv[5]
+VAR2=sys.argv[6]
+VAR3=sys.argv[7]
+VAR4=sys.argv[8]
+VAR5=sys.argv[9]
 
 ## Attribute XML File
 attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
