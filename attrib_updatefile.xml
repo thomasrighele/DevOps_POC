@@ -20,32 +20,4 @@
 			</attributes>
 		</connection>
 	</configuration>
-	<configuration>
-		<environment>DEV</environment>
-		<connection>
-			<name>connConnectorTEST-Salesforce</name>
-			<attributes>
-				<varname>authUrl</varname>
-				<varvalue>https://guycarp--gcmpclmdev.cs30.my.salesforce.com/services/oauth2/authorize</varvalue>
-			</attributes>
-			<attributes>
-				<varname>tokenUrl</varname>
-				<varvalue>https://guycarp--gcmpclmdev.cs30.my.salesforce.com/services/oauth2/token</varvalue>
-			</attributes>
-		</connection>
-	</configuration>
-	<configuration>
-		<environment>SIT</environment>
-		<connection>
-			<name>connConnectorTEST-Salesforce</name>
-			<attributes>
-				<varname>authUrl</varname>
-				<varvalue>https://guycarp--gcmpclmsit.cs30.my.salesforce.com/services/oauth2/authorize</varvalue>
-			</attributes>
-			<attributes>
-				<varname>tokenUrl</varname>
-				<varvalue>https://guycarp--gcmpclmsit.cs30.my.salesforce.com/services/oauth2/token</varvalue>
-			</attributes>
-		</connection>
-	</configuration>		
 </attribupdatefile>
