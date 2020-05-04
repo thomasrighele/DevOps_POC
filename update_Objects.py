@@ -88,9 +88,9 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                         for attributes in connection.iter('attributes'):
                             varname = attributes.find('varname').text
                             varvalue = attributes.find('varvalue').text
-                            if varvalue == 'login':
+                            if varvalue == 'rblogin':
                                 varvalue = rb_login                           
-                            if varvalue == 'password':
+                            if varvalue == 'rbpassword':
                                 varvalue = rb_password                                
                             attributes = connections.find('{http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd}attributes')
                             attribute = attributes.find('{http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd}attribute[@name="'+varname+'"]')
