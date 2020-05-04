@@ -7,8 +7,12 @@
 			<attributes>
 				<varname>hostname</varname>
 				<varvalue>enez9owoe8xw6</varvalue>
+			</attributes>
+			<attributes>	
 				<varname>login</varname>
-				<varvalue>rblogin</varvalue>				
+				<varvalue>rblogin</varvalue>
+			</attributes>
+			<attributes>				
 				<varname>password</varname>
 				<varvalue>rbpassword</varvalue>				
 			</attributes>
@@ -21,10 +25,14 @@
 			<attributes>
 				<varname>hostname</varname>
 				<varvalue>en91eklc5ohtf</varvalue>
+			</attributes>
+			<attributes>	
 				<varname>login</varname>
-				<varvalue>rblogin</varvalue>				
+				<varvalue>rblogin</varvalue>
+			</attributes>
+			<attributes>				
 				<varname>password</varname>
-				<varvalue>rbpassword</varvalue>					
+				<varvalue>rbpassword</varvalue>				
 			</attributes>
 		</connection>
 	</configuration>
