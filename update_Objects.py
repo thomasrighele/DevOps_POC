@@ -16,6 +16,7 @@ VAR4=sys.argv[8]
 VAR5=sys.argv[9]
 rb_login=VAR1
 rb_password=VAR2
+print("The login and password are " + rb_login + " " + rb_password)
 
 ## Attribute XML File
 attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
