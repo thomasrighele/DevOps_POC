@@ -16,7 +16,6 @@ VAR4=sys.argv[8]
 VAR5=sys.argv[9]
 rb_login=VAR1
 rb_password=VAR2
-print("The login and password are " + rb_login + " " + rb_password)
 
 ## Attribute XML File
 attribupdatefile= XMLDir + '/_' + ProjectName + '/attrib_updatefile.xml'
@@ -90,9 +89,11 @@ for configuration in attribupdatefile_parsed.iter('configuration'):
                             varname = attributes.find('varname').text
                             varvalue = attributes.find('varvalue').text
                             if varvalue == 'rblogin':
-                                varvalue = rb_login                           
+                                varvalue = rb_login
+                                print("We are here with a value of " + varvalue)                           
                             if varvalue == 'rbpassword':
-                                varvalue = rb_password                                
+                                varvalue = rb_password
+                                print("We are here with a value of " + varvalue)                                                           
                             attributes = connections.find('{http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd}attributes')
                             attribute = attributes.find('{http://schemas.informatica.com/socrates/data-services/2014/04/avosConnections.xsd}attribute[@name="'+varname+'"]')
                             attribute.set('value',varvalue)
