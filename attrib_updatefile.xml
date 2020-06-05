@@ -8,14 +8,6 @@
 				<varname>hostname</varname>
 				<varvalue>en20sp2naoz2ij</varvalue>
 			</attributes>
-			<attributes>	
-				<varname>login</varname>
-				<varvalue>rblogin</varvalue>
-			</attributes>
-			<attributes>				
-				<varname>password</varname>
-				<varvalue>rbpassword</varvalue>				
-			</attributes>
 		</connection>
 	</configuration>
 	<configuration>
@@ -25,14 +17,6 @@
 			<attributes>
 				<varname>hostname</varname>
 				<varvalue>en86gxe18na7t</varvalue>
-			</attributes>
-			<attributes>	
-				<varname>login</varname>
-				<varvalue>rblogin</varvalue>
-			</attributes>
-			<attributes>				
-				<varname>password</varname>
-				<varvalue>rbpassword</varvalue>				
 			</attributes>
 		</connection>
 	</configuration>
