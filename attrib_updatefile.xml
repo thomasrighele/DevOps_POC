@@ -20,4 +20,24 @@
 			</attributes>
 		</connection>
 	</configuration>
+	<configuration>
+		<environment>DEV</environment>
+		<connection>
+			<name>connEmail-IICS</name>
+			<attributes>
+				<varname>fromAddress</varname>
+				<varvalue>admin_DEV@informatica.com</varvalue>
+			</attributes>
+		</connection>
+	</configuration>
+	<configuration>
+		<environment>SIT</environment>
+		<connection>
+			<name>connEmail-IICS</name>
+			<attributes>
+				<varname>fromAddress</varname>
+				<varvalue>admin_SIT@informatica.com</varvalue>
+			</attributes>
+		</connection>
+	</configuration>
 </attribupdatefile>
