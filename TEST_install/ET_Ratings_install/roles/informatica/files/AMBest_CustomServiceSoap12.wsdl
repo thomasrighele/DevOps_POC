@@ -1,0 +1,523 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Oracle JAX-WS 2.1.5. --><wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/custom/CustomService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://tempuri.org/custom/CustomService">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/custom/CustomService">
+      <s:element name="TestSampleOutput">
+        <s:complexType/>
+      </s:element>
+      <s:element name="TestSampleOutputResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestSampleOutputResult" type="tns:CustomOutputClass"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CustomOutputClass">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:FieldOutputClass">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="dTransactionStart" type="s:dateTime"/>
+              <s:element minOccurs="1" maxOccurs="1" name="dTransactionEnd" type="s:dateTime"/>
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FieldOutputClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnCodeType" type="tns:ReturnCodeType"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnMessage" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sCustomerMessage" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aAMBFieldData" type="tns:ArrayOfAMBOutputClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aStateLineInfo" type="tns:ArrayOfStateLineClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aLineInfo" type="tns:ArrayOfLineClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aStateInfo" type="tns:ArrayOfStateClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aReinsurer" type="tns:ArrayOfReinsurerClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aReinsurersWithAMBs" type="tns:ArrayOfReinsurerInfoClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aIssuer" type="tns:ArrayOfIssuerClass"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nOutputRowCount" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sSQL" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dsOutput">
+            <s:complexType>
+              <s:sequence>
+                <s:any/>
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="sSumSQL" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dsSumOutput">
+            <s:complexType>
+              <s:sequence>
+                <s:any/>
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="sSumStateSQL" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dsSumStateOutput">
+            <s:complexType>
+              <s:sequence>
+                <s:any/>
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="sSumStateLineSQL" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dsSumStateLineOutput">
+            <s:complexType>
+              <s:sequence>
+                <s:any/>
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="sSumLineSQL" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dsSumLineOutput">
+            <s:complexType>
+              <s:sequence>
+                <s:any/>
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="sIssuerSQL" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dsIssuerOutput">
+            <s:complexType>
+              <s:sequence>
+                <s:any/>
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ReturnCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success"/>
+          <s:enumeration value="UndefinedError"/>
+          <s:enumeration value="NoData"/>
+          <s:enumeration value="NotLoggedIn"/>
+          <s:enumeration value="BadConnectionString"/>
+          <s:enumeration value="AccessDeniedSingle"/>
+          <s:enumeration value="AccessDeniedIP"/>
+          <s:enumeration value="AuthorizationFailed"/>
+          <s:enumeration value="InputInvalid"/>
+          <s:enumeration value="SystemNotAvailable"/>
+          <s:enumeration value="OracleError"/>
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfAMBOutputClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AMBOutputClass" nillable="true" type="tns:AMBOutputClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AMBOutputClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="nAMBNum" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sCompanyName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sCompanyType" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Is_Rating_Unit" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sDomicile" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aFieldData" type="tns:ArrayOfFinDataOutputClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFinDataOutputClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FinDataOutputClass" nillable="true" type="tns:FinDataOutputClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FinDataOutputClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="sFieldId" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nAMBNum" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sExhibit" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sPage" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sColumn" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sLine" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sDescription" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bAlphaValue" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sFieldName" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sFormat" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductShortName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductDescription" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductAbbr" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bFieldIsProductSpecific" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aYearData" type="tns:ArrayOfYearDataClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aLookupReferenceOutput" type="tns:ArrayOfLookupReferenceOutput"/>
+          <s:element minOccurs="1" maxOccurs="1" name="sLookupReferenceSortKey" type="s:long"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bFakeData" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sConCatDelimiter" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nNumericType" type="tns:NumericType"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfYearDataClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="YearDataClass" nillable="true" type="tns:YearDataClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="YearDataClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="nYear" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nQuarter" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sFormat" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nValue" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nOriginalValue" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nAverageValue" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sValue" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sYear" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bResultNotAvailableForSummation" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sConvertedCurrency" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bCurrencyConvertedSuccessfully" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bIsCalculation" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bFakeData" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nNumericType" type="tns:NumericType"/>
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="NumericType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Currency_Divided_In_Thousands"/>
+          <s:enumeration value="Currency_As_Filed"/>
+          <s:enumeration value="Whole_Number"/>
+          <s:enumeration value="Ratio_Percent"/>
+          <s:enumeration value="Calculation_Number"/>
+          <s:enumeration value="Calculation_Percentage"/>
+          <s:enumeration value="Calculation_Ratio"/>
+          <s:enumeration value="Alpha"/>
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfLookupReferenceOutput">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LookupReferenceOutput" nillable="true" type="tns:LookupReferenceOutput"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LookupReferenceOutput">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="nLookupTableId" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sColumnTitle" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sLookupValue" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sDistinctLookupValue" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nLookupNum" type="s:long"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bSummation" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sLookupCode" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bFakeData" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bUseGroupedLogic" type="s:boolean"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStateLineClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StateLineClass" nillable="true" type="tns:StateLineClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StateLineClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StateCode" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="StateDescription" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aLineData" type="tns:ArrayOfLineClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLineClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LineClass" nillable="true" type="tns:LineClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LineClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Linecode" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="LineDescription" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductShortName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductDescription" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductAbbr" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aAMBFieldData" type="tns:ArrayOfAMBOutputClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStateClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StateClass" nillable="true" type="tns:StateClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StateClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StateCode" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="StateDescription" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductShortName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductDescription" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sProductAbbr" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aAMBFieldData" type="tns:ArrayOfAMBOutputClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfReinsurerClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReinsurerClass" nillable="true" type="tns:ReinsurerClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReinsurerClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="bNoDataFound" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nAMBNum" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sCompanyName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sCompanyType" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Is_Rating_Unit" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sDomicile" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="AMBNumParts" type="tns:AmbNumClass"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sSortOrder" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aReinsurerInfo" type="tns:ArrayOfReinsurerInfoClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AmbNumClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="nAmbnum" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sCompanyName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aSection" type="tns:ArrayOfSectionClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aCoreFieldData" type="tns:ArrayOfAMBOutputClass"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart1" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart2" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart3" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart4" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart5" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart6" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart7" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart8" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart9" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart10" type="s:boolean"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSectionClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SectionClass" nillable="true" type="tns:SectionClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SectionClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="nSection" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aLine" type="tns:ArrayOfReinLineClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfReinLineClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReinLineClass" nillable="true" type="tns:ReinLineClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReinLineClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="nLine" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aFieldData" type="tns:ArrayOfFinDataOutputClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfReinsurerInfoClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReinsurerInfoClass" nillable="true" type="tns:ReinsurerInfoClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReinsurerInfoClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="bNoDataFound" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nReinsurerId" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sReinsurerLookupId" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nReinsurerAmbnum" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ReinsuredToCededReinsurers" type="tns:ReinsurerClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sReinsurerName" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nReinsurerNaicNum" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sReinsurerFein" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sJurisdiction" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sPoolIndicator" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sReportedCurrency" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart1" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart2" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart3" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart4" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart5" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart6" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart7" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart8" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart9" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bPart10" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="bIsTotal" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aSection" type="tns:ArrayOfSectionClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aAMBNumParts" type="tns:ArrayOfAmbNumClass"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sSortOrder" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAmbNumClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AmbNumClass" nillable="true" type="tns:AmbNumClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfIssuerClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IssuerClass" nillable="true" type="tns:IssuerClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IssuerClass">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="nAmbNum" type="s:long"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSortOrder" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sCompanyName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sCompanyType" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Is_Rating_Unit" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sDomicile" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aIssuerInfo" type="tns:ArrayOfIssuerInfoClass"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aMktSector" type="tns:ArrayOfFinDataOutputClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfIssuerInfoClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IssuerInfoClass" nillable="true" type="tns:IssuerInfoClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IssuerInfoClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="sIssuerID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sIssuerSuffix" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sIssuerName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="sIssuerDescription" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nSectionId" type="s:long"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nLineId" type="s:long"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aFieldData" type="tns:ArrayOfFinDataOutputClass"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FieldIdSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="clsInput" type="tns:CustomInputClass"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CustomInputClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="nDeliveryId" type="s:long"/>
+          <s:element minOccurs="1" maxOccurs="1" name="dStartTime" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="dEndTime" type="s:dateTime"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FieldIdSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FieldIdSearchResult" type="tns:FieldOutputClass"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FieldIdSearchDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="clsInput" type="tns:CustomInputClass"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FieldIdSearchDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FieldIdSearchDateResult" type="tns:CustomOutputClass"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TestSampleOutputSoapIn">
+    <wsdl:part name="parameters" element="tns:TestSampleOutput"/>
+  </wsdl:message>
+  <wsdl:message name="TestSampleOutputSoapOut">
+    <wsdl:part name="parameters" element="tns:TestSampleOutputResponse"/>
+  </wsdl:message>
+  <wsdl:message name="FieldIdSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:FieldIdSearch"/>
+  </wsdl:message>
+  <wsdl:message name="FieldIdSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:FieldIdSearchResponse"/>
+  </wsdl:message>
+  <wsdl:message name="FieldIdSearchDateSoapIn">
+    <wsdl:part name="parameters" element="tns:FieldIdSearchDate"/>
+  </wsdl:message>
+  <wsdl:message name="FieldIdSearchDateSoapOut">
+    <wsdl:part name="parameters" element="tns:FieldIdSearchDateResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CustomServiceSoap">
+    <wsdl:operation name="TestSampleOutput">
+      <wsdl:input message="tns:TestSampleOutputSoapIn"/>
+      <wsdl:output message="tns:TestSampleOutputSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="FieldIdSearch">
+      <wsdl:input message="tns:FieldIdSearchSoapIn"/>
+      <wsdl:output message="tns:FieldIdSearchSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="FieldIdSearchDate">
+      <wsdl:input message="tns:FieldIdSearchDateSoapIn"/>
+      <wsdl:output message="tns:FieldIdSearchDateSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomServiceSoap" type="tns:CustomServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="TestSampleOutput">
+      <soap:operation soapAction="http://tempuri.org/custom/CustomService/TestSampleOutput" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FieldIdSearch">
+      <soap:operation soapAction="http://tempuri.org/custom/CustomService/FieldIdSearch" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FieldIdSearchDate">
+      <soap:operation soapAction="http://tempuri.org/custom/CustomService/FieldIdSearchDate" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomServiceSoap12" type="tns:CustomServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="TestSampleOutput">
+      <soap12:operation soapAction="http://tempuri.org/custom/CustomService/TestSampleOutput" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FieldIdSearch">
+      <soap12:operation soapAction="http://tempuri.org/custom/CustomService/FieldIdSearch" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FieldIdSearchDate">
+      <soap12:operation soapAction="http://tempuri.org/custom/CustomService/FieldIdSearchDate" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomService">
+      <wsdl:port name="CustomServiceSoap" binding="tns:CustomServiceSoap">
+         <soap:address location="https://webservices.ambest.com/webservices2010/custom/customservice.asmx"/>
+      </wsdl:port>
+      <wsdl:port name="CustomServiceSoap12" binding="tns:CustomServiceSoap12">
+         <soap12:address location="https://webservices.ambest.com/webservices2010/custom/customservice.asmx"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
