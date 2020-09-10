@@ -1,5 +1,0 @@
-- include_tasks: install_rating.yml
-  when: action == 'install_rating'
-
-- include_tasks: install_profile.yml
-  when: action == 'install_profile'
